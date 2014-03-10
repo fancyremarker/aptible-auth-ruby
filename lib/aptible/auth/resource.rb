@@ -27,6 +27,12 @@ module Aptible
       nil
     end
 
+    def self.create(options)
+      token = options.delete(:token)
+      auth = Auth.new(token: token)
+      auth.send(collection_url).create(options)
+    end
+
     # rubocop:disable PredicateName
     def self.has_many(relation)
       define_method relation do
